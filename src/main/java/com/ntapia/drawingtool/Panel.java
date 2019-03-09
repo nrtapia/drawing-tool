@@ -22,7 +22,6 @@ class Panel {
     private static final String COMMAND_FILL_BUCKET = "B";
 
     private Canvas canvas;
-    private String[][] matrix;
     private int width;
     private int height;
 
@@ -59,20 +58,19 @@ class Panel {
 
         canvas = new Canvas(width, height);
         canvas.draw();
-        this.matrix = canvas.getMatrix();
     }
 
     private void addLine(String[] arguments) {
         validateCanvasAndArguments(arguments, 5);
 
-        Line line = new Line(matrix, new Point(arguments[1], arguments[2]), new Point(arguments[3], arguments[4]));
+        Line line = new Line(canvas, new Point(arguments[1], arguments[2]), new Point(arguments[3], arguments[4]));
          line.draw();
     }
 
     private void addRectangle(String[] arguments) {
         validateCanvasAndArguments(arguments, 5);
 
-        Rectangle rectangle = new Rectangle(matrix, new Point(arguments[1], arguments[2]),
+        Rectangle rectangle = new Rectangle(canvas, new Point(arguments[1], arguments[2]),
                 new Point(arguments[3], arguments[4]));
         rectangle.draw();
     }
@@ -102,6 +100,7 @@ class Panel {
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
+        String[][] matrix = canvas.getMatrix();
 
         for (int y = 0; y < height + 2; y++) {
             for (int x = 0; x < width + 2; x++) {

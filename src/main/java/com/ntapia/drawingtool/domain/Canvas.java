@@ -3,16 +3,17 @@ package com.ntapia.drawingtool.domain;
 /**
  *
  */
-public class Canvas extends Shape {
+public class Canvas implements Shape {
 
     private static final String LINE = "-";
     private static final String PIPE = "|";
 
     private final int width;
     private final int height;
+    private String[][] matrix;
 
     public Canvas(int width, int height) {
-        super(new String[width + 2][height + 2]);
+        this.matrix = new String[width + 2][height + 2];
         this.width = width;
         this.height = height;
     }
