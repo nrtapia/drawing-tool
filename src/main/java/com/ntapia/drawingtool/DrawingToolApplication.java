@@ -10,22 +10,29 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+/**
+ * Application entry point
+ */
 public class DrawingToolApplication {
 
     private static final String OUTPUT_FILE = "output.txt";
     private static final String INPUT_FILE = "input.txt";
 
     public static void main(String[] args) {
-        StringBuilder builder = new StringBuilder();
-        Panel panel = new Panel();
 
         Path inputFile = Paths.get(INPUT_FILE);
-        if(!Files.exists(inputFile)){
+        if (!Files.exists(inputFile)) {
             throw new DrawingInputFileNotFound();
         }
 
+        StringBuilder builder = new StringBuilder();
+        Panel panel = new Panel();
+
         try (Stream<String> stream = Files.lines(inputFile)) {
+            System.out.printf("Start reading the file %s%n", INPUT_FILE);
+
             stream.forEach(line -> {
+                System.out.printf("Run command: %s%n", line);
                 panel.addShape(line);
                 builder.append(panel.toString());
             });
@@ -37,6 +44,7 @@ public class DrawingToolApplication {
     }
 
     private static void writeToFile(String values) {
+        System.out.printf("Start write the file %s%n", OUTPUT_FILE);
         try {
             Files.write(Paths.get(OUTPUT_FILE), values.getBytes());
         } catch (IOException e) {

@@ -1,7 +1,7 @@
 package com.ntapia.drawingtool.domain;
 
 /**
- *
+ * Domain to represent a coordinate (x, y)
  */
 public class Point {
 
@@ -14,8 +14,7 @@ public class Point {
     }
 
     public Point(String x, String y) {
-        this.x = Integer.valueOf(x);
-        this.y = Integer.valueOf(y);
+        this(Integer.valueOf(x), Integer.valueOf(y));
     }
 
     int getX() {
